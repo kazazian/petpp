@@ -1,12 +1,7 @@
-"""
-Простой анализ A/B-теста: без статистических тестов,
-просто считаем проценты и рисуем график.
-"""
 
 import csv
 import matplotlib.pyplot as plt
 
-# Загружаем данные
 data = {"A": [], "B": []}
 
 with open("data.csv") as f:
@@ -16,7 +11,6 @@ with open("data.csv") as f:
         bought = int(row["bought"])
         data[group].append(bought)
 
-# Считаем конверсию (% купивших) в каждой группе
 results = {}
 for group, values in data.items():
     total = len(values)
@@ -25,7 +19,6 @@ for group, values in data.items():
     results[group] = conversion
     print(f"Группа {group}: {bought} из {total} купили ({conversion:.1f}%)")
 
-# Сравниваем
 diff = results["B"] - results["A"]
 print(f"\nРазница между B и A: {diff:.1f} процентных пункта")
 
@@ -38,7 +31,7 @@ elif diff < 0:
 else:
     print("Вывод: разницы нет.")
 
-# Рисуем простой график
+
 groups = list(results.keys())
 values = list(results.values())
 
